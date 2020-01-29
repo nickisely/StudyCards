@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Data Source=C:\Dev\StudyCards\StudyCards.db;" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Entities -f
