@@ -9,15 +9,12 @@ namespace StudyCards.Models
 {
     public class CategoryModel : ICategory
     {
-        private ReadOnlyCollection<IGroup> groups;
-
         public CategoryModel(IEnumerable<IGroup>? groups)
         {
             this.Groups = groups != null ? groups.ToList().AsReadOnly() : new List<IGroup>().AsReadOnly();
         }
 
-
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public IEnumerable<IGroup> Groups { get; }
 

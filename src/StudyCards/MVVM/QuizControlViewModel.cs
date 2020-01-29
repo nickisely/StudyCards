@@ -10,10 +10,8 @@ namespace StudyCards.MVVM
 {
     public class QuizControlViewModel : ViewModelBase
     {
-        private IStudyCard[]? cards;
-
-
         private string? sideName;
+
         public string? SideName
         {
             get => this.sideName;
@@ -21,6 +19,7 @@ namespace StudyCards.MVVM
         }
 
         private string? sideText;
+
         public string? SideText
         {
             get => this.sideText;
@@ -28,6 +27,7 @@ namespace StudyCards.MVVM
         }
 
         private IEnumerable<ICategory>? categories;
+
         public IEnumerable<ICategory>? Categories
         {
             get => this.categories;
@@ -35,6 +35,7 @@ namespace StudyCards.MVVM
         }
 
         private IEnumerable<IGroup>? groups;
+
         public IEnumerable<IGroup>? Groups
         {
             get => this.groups;
@@ -42,6 +43,7 @@ namespace StudyCards.MVVM
         }
 
         private IEnumerable<ISubGroup>? subGroups;
+
         public IEnumerable<ISubGroup>? SubGroups
         {
             get => this.subGroups;
@@ -49,6 +51,7 @@ namespace StudyCards.MVVM
         }
 
         private ICategory? selectedCategory;
+
         public ICategory? SelectedCategory
         {
             get => this.selectedCategory;
@@ -60,6 +63,7 @@ namespace StudyCards.MVVM
         }
 
         private IGroup? selectedGroup;
+
         public IGroup? SelectedGroup
         {
             get => this.selectedGroup;
@@ -71,6 +75,7 @@ namespace StudyCards.MVVM
         }
 
         private ISubGroup? selectedSubGroup;
+
         public ISubGroup? SelectedSubGroup
         {
             get => this.selectedSubGroup;
@@ -102,12 +107,10 @@ namespace StudyCards.MVVM
             this.OnRefresh();
         }
 
-
         private async void OnRefresh()
         {
             this.Categories = await this.categoryService.GetCategoriesAsync(IncludeLevel.None).ConfigureAwait(false);
         }
-
 
         private async void OnSelectedCategoryChanged()
         {
@@ -138,13 +141,12 @@ namespace StudyCards.MVVM
             this.SetQuestion();
         }
 
-
         private void OnFlip()
         {
             if (this.isQuestion)
                 this.SetAnswer();
             else
-                this.SetQuestion();            
+                this.SetQuestion();
         }
 
         private void OnPrevCard()
@@ -174,6 +176,5 @@ namespace StudyCards.MVVM
             this.SideText = studyCard?.Answer;
             this.isQuestion = false;
         }
-
     }
 }

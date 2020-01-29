@@ -9,16 +9,14 @@ namespace StudyCards.MVVM
     public class AddEditCategoryViewModel : ViewModelBase
     {
         private string? newName;
+
         public string? NewName
         {
             get => this.newName;
             set => this.SetValue(ref this.newName, value);
         }
 
-
         public ICommand AddCommand => new ActionCommand(this.OnAdd);
-
-
 
         private readonly ICategoryService categoryService;
 

@@ -8,7 +8,7 @@ namespace StudyCards.MVVM
     public class ActionCommand : ICommand
     {
         private readonly Action action;
-        private readonly Func<bool> canExecute;
+        private readonly Func<bool>? canExecute;
 
         public ActionCommand(Action action, Func<bool>? canExecute = null)
         {
@@ -16,11 +16,13 @@ namespace StudyCards.MVVM
             this.canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+#pragma warning disable CS0067
+        public event EventHandler? CanExecuteChanged;
+#pragma warning restore CS0067
 
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null ? true : this.canExecute();
+            return this.canExecute == null || this.canExecute();
         }
 
         public void Execute(object parameter)
@@ -32,19 +34,21 @@ namespace StudyCards.MVVM
     public class ActionCommand<T> : ICommand
     {
         private readonly Action<T> action;
-        private readonly Func<T, bool> canExecute;
+        private readonly Func<T, bool>? canExecute;
 
-        public ActionCommand(Action<T> action, Func<T, bool> canExecute = null)
+        public ActionCommand(Action<T> action, Func<T, bool>? canExecute = null)
         {
             this.action = action;
             this.canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+#pragma warning disable CS0067
+        public event EventHandler? CanExecuteChanged;
+#pragma warning restore CS0067
 
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null ? true : this.canExecute((T)parameter);
+            return this.canExecute == null || this.canExecute((T)parameter);
         }
 
         public void Execute(object parameter)

@@ -11,7 +11,7 @@ namespace StudyCards.MVVM
     {
         private readonly SynchronizationContext synchronizationContext;
 
-        public ViewModelBase()
+        protected ViewModelBase()
         {
             this.synchronizationContext = SynchronizationContext.Current;
         }
@@ -24,13 +24,12 @@ namespace StudyCards.MVVM
             return true;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = default)
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = default)
         {
             this.synchronizationContext.Post(_ =>
                             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)), null);
-
         }
     }
 }

@@ -11,6 +11,7 @@ namespace StudyCards.MVVM
     public class AddStudyCardViewModel : ViewModelBase
     {
         private IEnumerable<ICategory>? categories;
+
         public IEnumerable<ICategory>? Categories
         {
             get => this.categories;
@@ -18,6 +19,7 @@ namespace StudyCards.MVVM
         }
 
         private IEnumerable<IGroup>? groups;
+
         public IEnumerable<IGroup>? Groups
         {
             get => this.groups;
@@ -25,6 +27,7 @@ namespace StudyCards.MVVM
         }
 
         private IEnumerable<ISubGroup>? subGroups;
+
         public IEnumerable<ISubGroup>? SubGroups
         {
             get => this.subGroups;
@@ -32,6 +35,7 @@ namespace StudyCards.MVVM
         }
 
         private ICategory? selectedCategory;
+
         public ICategory? SelectedCategory
         {
             get => this.selectedCategory;
@@ -43,6 +47,7 @@ namespace StudyCards.MVVM
         }
 
         private IGroup? selectedGroup;
+
         public IGroup? SelectedGroup
         {
             get => this.selectedGroup;
@@ -54,14 +59,15 @@ namespace StudyCards.MVVM
         }
 
         private ISubGroup? selectedSubGroup;
+
         public ISubGroup? SelectedSubGroup
         {
             get => this.selectedSubGroup;
-            set => this.SetValue(ref this.selectedSubGroup, value);            
+            set => this.SetValue(ref this.selectedSubGroup, value);
         }
 
-
         private string? question;
+
         public string? Question
         {
             get => this.question;
@@ -69,6 +75,7 @@ namespace StudyCards.MVVM
         }
 
         private string? answer;
+
         public string? Answer
         {
             get => this.answer;
@@ -90,12 +97,10 @@ namespace StudyCards.MVVM
             this.OnRefresh();
         }
 
-
         private async void OnRefresh()
         {
             this.Categories = await this.categoryService.GetCategoriesAsync(IncludeLevel.None).ConfigureAwait(false);
         }
-
 
         private async void OnSelectedCategoryChanged()
         {
@@ -117,15 +122,17 @@ namespace StudyCards.MVVM
 
         private async void OnSave()
         {
-            if (this.SelectedSubGroup == null || 
-                string.IsNullOrWhiteSpace(this.Question) || 
+            if (this.SelectedSubGroup == null ||
+                string.IsNullOrWhiteSpace(this.Question) ||
                 string.IsNullOrWhiteSpace(this.Answer))
+            {
                 return;
+            }
 
             var studyCard = new StudyCardModel()
             {
-                Question = this.Question,
-                Answer = this.Answer,
+                Question = this.Question!,
+                Answer = this.Answer!,
                 SubGroupId = this.SelectedSubGroup.Id
             };
 
