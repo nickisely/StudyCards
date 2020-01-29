@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <None Remove="Protos\Services.proto" />
-    <None Remove="Protos\TestService.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +23,6 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\Services.proto" />
-    <Protobuf Include="Protos\TestService.proto" />
   </ItemGroup>
   
 </Project>

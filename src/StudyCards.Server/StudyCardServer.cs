@@ -1,8 +1,5 @@
 ﻿using Grpc.Core;
-using Helloworld;
 using System;
-using System.Threading.Tasks;
-using Grpc.Core;
 using StudyCards.Data;
 using StudyCards.GRPC;
 using System.Net;
@@ -17,8 +14,6 @@ namespace StudyCards.Server
         {
             var hostName = Dns.GetHostName();
             IPHostEntry iphostentry = Dns.GetHostByName(hostName);
-
-            //var credentials = new Grpc.Core.SslServerCredentials()
 
             var serverPorts = iphostentry.AddressList
                 .Where(x => x.AddressFamily == AddressFamily.InterNetwork)
@@ -35,7 +30,6 @@ namespace StudyCards.Server
                     GroupService.BindService(new Services.GroupService(groupService)),
                     StudyCardService.BindService(new Services.StudyCardService(studyCardService))
                 }
-                //Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
             };
 
             foreach (var serverPort in serverPorts)
@@ -45,6 +39,5 @@ namespace StudyCards.Server
 
             return server;
         }
-
     }
 }
